@@ -1,8 +1,16 @@
 import Navbar from "../components/NavBar"
+import avatar_curriculo from "../assets/avatar_curriculo.png"
 
 function Home() {
     return(
-        <Navbar/>
+        <>
+            <Navbar/>
+            <img src={avatar_curriculo} alt="avatar_curriculo" />
+
+            
+        </>
+        
+        
     );
 }
 
