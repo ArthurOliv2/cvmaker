@@ -8,7 +8,7 @@ function Home() {
             <Navbar />
             <section className="bg-[#F9FBFC] py-24">
                 <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-20">
-                    {/* Texto à esquerda */}
+                    
                     <div className="w-full md:w-1/2 text-left">
                         <h1 className="text-5xl md:text-6xl font-poppins font-extrabold text-[#2E2E2E] leading-tight mb-6">
                             Crie seu currículo <br className="hidden sm:block" />
@@ -25,7 +25,6 @@ function Home() {
                         </Link>
                     </div>
 
-                    {/* Imagem à direita */}
                     <div className="w-full md:w-1/2 flex justify-center md:justify-end">
                         <img
                             src={avatar_curriculo}

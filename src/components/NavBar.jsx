@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "./logo";
 
 function NavBar() {
     return(
         <nav className="fixed top-0 lef-0 w-full z-50 bg-[#005F6B] text-[#F9FBFC] px-6 py-4 flex justify-between items-center shadow-md">
-            <span className="text-2x1 font-semibold">CvMaker</span>
+            <Link to="/">
+                <Logo />    
+            </Link>
             <div className="flex items-center space-x-6">
                 <Link to="/" className="transition-transform duration-200 hover:scale-110">Início</Link>
                 <Link to="/sobre" className="transition-transform duration-200 hover:scale-110">Sobre</Link>
