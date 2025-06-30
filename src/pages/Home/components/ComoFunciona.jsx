@@ -1,5 +1,4 @@
-// src/components/Benefits.jsx
-function Benefits() {
+function ComoFunciona() {
     return (
         <section className="bg-white py-20 px-6">
             <div className="max-w-7xl mx-auto">
@@ -18,7 +17,7 @@ function Benefits() {
                             Adicione seus dados, experiências, formações e habilidades de forma simples.
                         </p>
                     </div>
-
+                    
                     {/* Card 2 */}
                     <div className="flex flex-col items-center p-6 bg-[#F9FBFC] rounded-xl shadow-sm hover:shadow-md transition">
                         <span className="text-5xl mb-4">🎨</span>
@@ -42,4 +41,4 @@ function Benefits() {
     );
 }
 
-export default Benefits;
+export default ComoFunciona;

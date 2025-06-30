@@ -1,6 +1,6 @@
 import Navbar from "../../components/NavBar"
 import HeroSection from "./components/HeroSection";
-import Benefits from "./components/Benefits";
+import ComoFunciona from "./components/ComoFunciona";
 import CallToAction from "./components/CallToAction";
 import Footer from "../../components/Footer";
 
@@ -9,7 +9,7 @@ function Home() {
         <>
             <Navbar />
             <HeroSection/>
-            <Benefits />
+            <ComoFunciona />
             <CallToAction />
             <Footer />
         </>
