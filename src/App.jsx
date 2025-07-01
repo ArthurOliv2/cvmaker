@@ -12,7 +12,7 @@ function App() {
             <Route path="/contato" element={<Contato />} />
             <Route path="/criar-curriculo" element={<CriarCurriculo />} />
         </Routes>
-    )
+    );
 }
 
 export default App;
