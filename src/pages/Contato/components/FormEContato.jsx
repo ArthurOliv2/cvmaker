@@ -7,6 +7,11 @@ function FormEContato() {
             <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
                 {/* Formulário */}
                 <form className="bg-white p-8 rounded-lg shadow-md flex-1">
+                    <div className="mb-8 text-left">
+                        <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-1">Entre em contato</h2>
+                        <p className="text-[#6C757D] text-sm">Preencha o formulário e responderemos o quanto antes.</p>
+                    </div>
+
                     <div className="mb-4">
                         <label className="block mb-2 text-[#2E2E2E] font-medium">Nome</label>
                         <input
@@ -39,10 +44,16 @@ function FormEContato() {
                 </form>
 
                 {/* Informações de contato */}
+
+
                 <div className="flex-1 bg-white p-8 rounded-lg shadow-md flex flex-col gap-6">
+                    <div className="mb-4">
+                        <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-1">Outras formas de contato</h2>
+                        <p className="text-[#6C757D] text-sm">Caso prefira, fale conosco por email, WhatsApp ou redes sociais.</p>
+                    </div>
                     <div>
                         <h3 className="text-xl font-bold text-[#2E2E2E] mb-2 flex items-center gap-3">
-                            <Mail className="w-6 h-6 text-[#0097B2]" />
+                            <Mail className="w-7 h-7 text-[#0097B2]" />
                             Email de contato
                         </h3>
                         <p className="text-[#6C757D] text-base">contato@cvmaker.com</p>
@@ -50,7 +61,7 @@ function FormEContato() {
 
                     <div>
                         <h3 className="text-xl font-bold text-[#2E2E2E] mb-2 flex items-center gap-3">
-                            <Phone className="w-6 h-6 text-[#0097B2]" />
+                            <Phone className="w-7 h-7 text-[#0097B2]" />
                             WhatsApp
                         </h3>
                         <p className="text-[#6C757D] text-base">(21) 97217-0432</p>
@@ -60,16 +71,16 @@ function FormEContato() {
                         <h3 className="text-xl font-bold text-[#2E2E2E] mb-2">Redes Sociais</h3>
                         <div className="flex gap-4 mt-2">
                             <a href="https://instagram.com/biro_op1" target="_blank" className="text-[#0097B2] hover:text-[#007A8C]">
-                                <FaInstagram className="w-6 h-6" />
+                                <FaInstagram className="w-7 h-7" />
                             </a>
                             <a href="https://facebook.com/share/16cdqbJkkRp" target="_blank" className="text-[#0097B2] hover:text-[#007A8C]">
-                                <FaFacebook className="w-6 h-6" />
+                                <FaFacebook className="w-7 h-7" />
                             </a>
                             <a href="https://Linkedin.com/in/arthur-oliveira-pires-marinho-correia-0a3b17334" target="_blank" className="text-[#0097B2] hover:text-[#007A8C]">
-                                <FaLinkedin className="w-6 h-6" />
+                                <FaLinkedin className="w-7 h-7" />
                             </a>
                             <a href="https://github.com/ArthurOliv2" target="_blank" className="text-[#0097B2] hover:text-[#007A8C]">
-                                <FaGithub className="w-6 h-6" />
+                                <FaGithub className="w-7 h-7" />
                             </a>
                         </div>
                     </div>
