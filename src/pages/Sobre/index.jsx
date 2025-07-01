@@ -1,8 +1,9 @@
 import Navbar from "../../components/NavBar"
 import HeroSection from "./components/HeroSection";
 import QuemSomos from "./components/QuemSomos";
+import Criador from "./components/Criador";
+import Valores from "./components/valores";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
 
 
 function Sobre() {
@@ -11,6 +12,8 @@ function Sobre() {
             <Navbar />
             <HeroSection />
             <QuemSomos />
+            <Criador />
+            <Valores />
             <Footer />
         </>
     );
