@@ -52,6 +52,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                             value={exp.empresa}
                             onChange={(e) => atualizarCampo(index, "empresa", e.target.value)}
                             className="w-full p-3 border rounded-lg"
+                            placeholder="Ex: Empresa X"
                         />
                     </div>
                     <div className="mb-4">
@@ -61,6 +62,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                             value={exp.cargo}
                             onChange={(e) => atualizarCampo(index, "cargo", e.target.value)}
                             className="w-full p-3 border rounded-lg"
+                            placeholder="ex: Desenvolvedor Front-end"
                         />
                     </div>
 

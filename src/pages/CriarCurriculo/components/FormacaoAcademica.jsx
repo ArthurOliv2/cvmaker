@@ -22,6 +22,7 @@ function FormacaoAcademica({ dados, setDados }) {
                             value={formacao.curso}
                             onChange={(e) => atualizarCampo(index, "curso", e.target.value)}
                             className="w-full p-3 border rounded-lg"
+                            placeholder="Ex: Engenharia de Software"
                         />
                     </div>
                     <div className="mb-4">
@@ -31,6 +32,7 @@ function FormacaoAcademica({ dados, setDados }) {
                             value={formacao.universidade}
                             onChange={(e) => atualizarCampo(index, "universidade", e.target.value)}
                             className="w-full p-3 border rounded-lg"
+                            placeholder="Ex: Universidade Federal de..."
                         />
                     </div>
                     <div>
