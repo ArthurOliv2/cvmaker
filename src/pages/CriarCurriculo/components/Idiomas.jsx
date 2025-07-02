@@ -46,7 +46,7 @@ function Idiomas({ dados, setDados }) {
             <button
                 type="button"
                 onClick={adicionarIdioma}
-                className="text-[#0097B2] font-semibold hover:underline"
+                className="text-[#0097B2] font-semibold hover:underline cursor-pointer"
             >
                 + Adicionar outro idioma
             </button>

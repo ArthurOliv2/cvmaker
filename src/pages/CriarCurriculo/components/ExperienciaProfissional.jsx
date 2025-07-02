@@ -127,7 +127,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                         <button
                             onClick={() => adicionarAtividade(index)}
                             type="button"
-                            className="text-[#0097B2] font-semibold hover:underline"
+                            className="text-[#0097B2] font-semibold hover:underline cursor-pointer"
                         >
                             + Adicionar outra atividade
                         </button>
@@ -139,7 +139,7 @@ function ExperienciaProfissional({ dados, setDados }) {
             <button
                 type="button"
                 onClick={adicionarExperiencia}
-                className="text-[#0097B2] font-semibold hover:underline"
+                className="text-[#0097B2] font-semibold hover:underline cursor-pointer"
             >
                 + Adicionar outra experiência
             </button>

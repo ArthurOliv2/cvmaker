@@ -51,7 +51,7 @@ function FormacaoComplementar({ dados, setDados }) {
             <button
                 type="button"
                 onClick={adicionarCurso}
-                className="text-[#0097B2] font-semibold hover:underline"
+                className="text-[#0097B2] font-semibold hover:underline cursor-pointer"
             >
                 + Adicionar outra formação complementar
             </button>

@@ -53,7 +53,7 @@ function FormacaoAcademica({ dados, setDados }) {
             <button
                 type="button"
                 onClick={adicionarFormacao}
-                className="text-[#0097B2] font-semibold hover:underline"
+                className="text-[#0097B2] font-semibold hover:underline cursor-pointer"
             >
                 + Adicionar outra formação
             </button>
