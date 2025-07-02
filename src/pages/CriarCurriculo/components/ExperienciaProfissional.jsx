@@ -127,7 +127,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                         </div>
 
                         {exp.atualmente ? (
-                            <div className="col-span-2 md:col-span-2 md:col-start-3 mb-4 h-full flex justify-center">
+                            <div className="col-span-2 md:col-span-2 md:col-start-3 h-full flex justify-center">
                                 <div className="w-full flex items-center justify-center border rounded-lg bg-[#E0F7FA] text-[#007A8C] text-md font-medium shadow-sm text-center">
                                     Atualmente trabalhando nesta empresa
                                 </div>
@@ -172,7 +172,9 @@ function ExperienciaProfissional({ dados, setDados }) {
                     </div>
 
                     <div className="mb-2">
-                        <label className="block text-[#2E2E2E] font-medium mb-2">O que você fazia na empresa?</label>
+                        <label className="block text-[#2E2E2E] font-medium mb-2">
+                            {exp.atualmente ? "O que você faz na empresa ?" : "O que você fazia na empresa ?"}
+                        </label>
                         {exp.atividades.map((atv, atvIndex) => (
                             <div key={atvIndex} className="flex gap-2 items-center mb-2">
                                 <input
