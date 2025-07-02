@@ -38,6 +38,12 @@ function ExperienciaProfissional({ dados, setDados }) {
         setDados(novas);
     };
 
+    const removerAtividade = (expIndex, atvIndex) => {
+        const novas = [...dados];
+        novas[expIndex].atividades.splice(atvIndex, 1);
+        setDados(novas);
+    };
+
     const meses = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -51,7 +57,7 @@ function ExperienciaProfissional({ dados, setDados }) {
 
             {dados.map((exp, index) => (
                 <div key={index} className="relative bg-white border rounded-lg shadow-sm p-4 mb-6">
-                    {/* Botão de remover */}
+                    {/* Botão de remover experiência */}
                     <button
                         type="button"
                         onClick={() => removerExperiencia(index)}
@@ -61,6 +67,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                         X
                     </button>
 
+                    {/* Campos */}
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Nome da empresa</label>
                         <input
@@ -79,11 +86,12 @@ function ExperienciaProfissional({ dados, setDados }) {
                             value={exp.cargo}
                             onChange={(e) => atualizarCampo(index, "cargo", e.target.value)}
                             className="w-full p-3 border rounded-lg"
-                            placeholder="ex: Desenvolvedor Front-end"
+                            placeholder="Ex: Desenvolvedor Front-end"
                         />
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        {/* Mês e Ano de início e término */}
                         <div>
                             <label className="block mb-1">Mês início</label>
                             <select
@@ -130,16 +138,26 @@ function ExperienciaProfissional({ dados, setDados }) {
                         </div>
                     </div>
 
+                    {/* Atividades */}
                     <div className="mb-2">
                         <label className="block text-[#2E2E2E] font-medium mb-2">O que você fazia na empresa?</label>
                         {exp.atividades.map((atv, atvIndex) => (
-                            <input
-                                key={atvIndex}
-                                value={atv}
-                                onChange={(e) => atualizarAtividade(index, atvIndex, e.target.value)}
-                                className="w-full p-2 mb-2 border rounded-lg"
-                                placeholder={`Atividade ${atvIndex + 1}`}
-                            />
+                            <div key={atvIndex} className="flex gap-2 items-center mb-2">
+                                <input
+                                    value={atv}
+                                    onChange={(e) => atualizarAtividade(index, atvIndex, e.target.value)}
+                                    className="w-full p-2 border rounded-lg"
+                                    placeholder={`Atividade ${atvIndex + 1}`}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => removerAtividade(index, atvIndex)}
+                                    className="text-gray-400 font-bold text-xl hover:text-red-700 cursor-pointer"
+                                    title="Remover atividade"
+                                >
+                                    X
+                                </button>
+                            </div>
                         ))}
                         <button
                             onClick={() => adicionarAtividade(index)}
