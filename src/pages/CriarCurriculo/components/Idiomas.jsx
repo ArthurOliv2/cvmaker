@@ -3,6 +3,12 @@ function Idiomas({ dados, setDados }) {
         setDados([...dados, { idioma: "", nivel: "" }]);
     };
 
+    const removerIdioma = (index) => {
+        const novos = [...dados];
+        novos.splice(index, 1);
+        setDados(novos);
+    };
+
     const atualizarCampo = (index, campo, valor) => {
         const novos = [...dados];
         novos[index][campo] = valor;
@@ -14,7 +20,16 @@ function Idiomas({ dados, setDados }) {
             <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-4">Idiomas</h2>
 
             {dados.map((item, index) => (
-                <div key={index} className="bg-white border rounded-lg shadow-sm p-4 mb-6">
+                <div key={index} className="relative bg-white border rounded-lg shadow-sm p-4 mb-6">
+                    <button
+                        type="button"
+                        onClick={() => removerIdioma(index)}
+                        className="absolute top-2 right-2 text-gray-400 hover:text-red-600 text-lg font-bold cursor-pointer"
+                        title="Remover idioma"
+                    >
+                        X
+                    </button>
+
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Idioma</label>
                         <input
@@ -55,3 +70,4 @@ function Idiomas({ dados, setDados }) {
 }
 
 export default Idiomas;
+

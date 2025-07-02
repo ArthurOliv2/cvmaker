@@ -3,6 +3,12 @@ function FormacaoAcademica({ dados, setDados }) {
         setDados([...dados, { curso: "", universidade: "", status: "cursando" }]);
     };
 
+    const removerFormacao = (index) => {
+        const novas = [...dados];
+        novas.splice(index, 1);
+        setDados(novas);
+    };
+
     const atualizarCampo = (index, campo, valor) => {
         const novas = [...dados];
         novas[index][campo] = valor;
@@ -14,7 +20,16 @@ function FormacaoAcademica({ dados, setDados }) {
             <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-4">Formação Acadêmica</h2>
 
             {dados.map((formacao, index) => (
-                <div key={index} className="mb-6 border p-4 rounded-lg bg-white shadow-sm">
+                <div key={index} className="relative mb-6 border p-4 rounded-lg bg-white shadow-sm">
+                    <button
+                        type="button"
+                        onClick={() => removerFormacao(index)}
+                        className="absolute top-2 right-2 text-gray-400 hover:text-red-600 text-lg font-bold cursor-pointer"
+                        title="Remover formação"
+                    >
+                        X
+                    </button>
+
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Nome do curso</label>
                         <input

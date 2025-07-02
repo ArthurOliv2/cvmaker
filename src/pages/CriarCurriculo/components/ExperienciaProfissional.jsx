@@ -14,6 +14,12 @@ function ExperienciaProfissional({ dados, setDados }) {
         ]);
     };
 
+    const removerExperiencia = (index) => {
+        const novas = [...dados];
+        novas.splice(index, 1);
+        setDados(novas);
+    };
+
     const atualizarCampo = (index, campo, valor) => {
         const novas = [...dados];
         novas[index][campo] = valor;
@@ -44,7 +50,17 @@ function ExperienciaProfissional({ dados, setDados }) {
             <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-4">Experiência Profissional</h2>
 
             {dados.map((exp, index) => (
-                <div key={index} className="bg-white border rounded-lg shadow-sm p-4 mb-6">
+                <div key={index} className="relative bg-white border rounded-lg shadow-sm p-4 mb-6">
+                    {/* Botão de remover */}
+                    <button
+                        type="button"
+                        onClick={() => removerExperiencia(index)}
+                        className="absolute top-2 right-2 text-gray-400 hover:text-red-600 text-lg font-bold cursor-pointer"
+                        title="Remover experiência"
+                    >
+                        X
+                    </button>
+
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Nome da empresa</label>
                         <input
@@ -55,6 +71,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                             placeholder="Ex: Empresa X"
                         />
                     </div>
+
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Cargo ocupado</label>
                         <input
