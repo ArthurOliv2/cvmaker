@@ -8,6 +8,9 @@ import Idiomas from "./components/Idiomas";
 import FormacaoComplementar from "./components/FormaçãoComplementar";
 import Footer from "../../components/Footer";
 
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import CurriculoPDF from "./components/CurriculoPDF";
+
 import { useState } from "react";
 
 function CriarCurriculo() {
@@ -74,12 +77,15 @@ function CriarCurriculo() {
                     setDados={(novo) => setFormulario(prev => ({ ...prev, cursosComplementares: novo }))}
                 />
                 
-                <button
-                    onClick={() => console.log(formulario)}
-                    className="bg-[#0097B2] text-white font-medium px-4 py-2 rounded mt-6 hover:bg-[#007A8C]"
-                >
-                    Ver dados preenchidos
-                </button>
+                <div className="flex justify-center mt-8">
+                    <PDFDownloadLink
+                        document={<CurriculoPDF dados={formulario} />}
+                        fileName="curriculo.pdf"
+                        className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center"
+                    >
+                        {({ loading }) => loading ? "Gerando PDF..." : "Baixar Currículo em PDF"}
+                    </PDFDownloadLink>
+                </div>
             </main>
             
             <Footer />
