@@ -104,7 +104,7 @@ function ExperienciaProfissional({ dados, setDados }) {
 
                     <div className="items-center grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                         <div>
-                            <label className="block mb-1">Mês início</label>
+                            <label className="block mb-1">Mês de início</label>
                             <select
                                 className="w-full p-3 border rounded-lg"
                                 value={exp.inicioMes}
@@ -115,7 +115,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                             </select>
                         </div>
                         <div>
-                            <label className="block mb-1">Ano início</label>
+                            <label className="block mb-1">Ano de início</label>
                             <select
                                 className="w-full p-3 border rounded-lg"
                                 value={exp.inicioAno}
@@ -135,7 +135,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                         ) : (
                             <>
                                 <div>
-                                    <label className="block mb-1">Mês término</label>
+                                    <label className="block mb-1">Mês de término</label>
                                     <select
                                         className="w-full p-3 border rounded-lg"
                                         value={exp.fimMes}
@@ -146,7 +146,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block mb-1">Ano término</label>
+                                    <label className="block mb-1">Ano de término</label>
                                     <select
                                         className="w-full p-3 border rounded-lg"
                                         value={exp.fimAno}
