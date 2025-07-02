@@ -9,6 +9,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                 inicioAno: "",
                 fimMes: "",
                 fimAno: "",
+                atualmente: false, 
                 atividades: [""],
             },
         ]);
@@ -44,6 +45,19 @@ function ExperienciaProfissional({ dados, setDados }) {
         setDados(novas);
     };
 
+    const alternarAtualmente = (index) => {
+        const novas = [...dados];
+        const atual = novas[index].atualmente;
+        novas[index].atualmente = !atual;
+
+        if (!atual) {
+            novas[index].fimMes = "";
+            novas[index].fimAno = "";
+        }
+
+        setDados(novas);
+    };
+
     const meses = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -57,7 +71,6 @@ function ExperienciaProfissional({ dados, setDados }) {
 
             {dados.map((exp, index) => (
                 <div key={index} className="relative bg-white border rounded-lg shadow-sm p-4 mb-6">
-                    {/* Botão de remover experiência */}
                     <button
                         type="button"
                         onClick={() => removerExperiencia(index)}
@@ -67,7 +80,6 @@ function ExperienciaProfissional({ dados, setDados }) {
                         X
                     </button>
 
-                    {/* Campos */}
                     <div className="mb-4">
                         <label className="block text-[#2E2E2E] font-medium mb-2">Nome da empresa</label>
                         <input
@@ -90,8 +102,7 @@ function ExperienciaProfissional({ dados, setDados }) {
                         />
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                        {/* Mês e Ano de início e término */}
+                    <div className="items-center grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                         <div>
                             <label className="block mb-1">Mês início</label>
                             <select
@@ -114,31 +125,52 @@ function ExperienciaProfissional({ dados, setDados }) {
                                 {anos.map((a) => <option key={a}>{a}</option>)}
                             </select>
                         </div>
-                        <div>
-                            <label className="block mb-1">Mês término</label>
-                            <select
-                                className="w-full p-3 border rounded-lg"
-                                value={exp.fimMes}
-                                onChange={(e) => atualizarCampo(index, "fimMes", e.target.value)}
-                            >
-                                <option value="">Atualmente</option>
-                                {meses.map((m) => <option key={m}>{m}</option>)}
-                            </select>
-                        </div>
-                        <div>
-                            <label className="block mb-1">Ano término</label>
-                            <select
-                                className="w-full p-3 border rounded-lg"
-                                value={exp.fimAno}
-                                onChange={(e) => atualizarCampo(index, "fimAno", e.target.value)}
-                            >
-                                <option value="">Atualmente</option>
-                                {anos.map((a) => <option key={a}>{a}</option>)}
-                            </select>
-                        </div>
+
+                        {exp.atualmente ? (
+                            <div className="col-span-2 md:col-span-2 md:col-start-3 mb-4 h-full flex justify-center">
+                                <div className="w-full flex items-center justify-center border rounded-lg bg-[#E0F7FA] text-[#007A8C] text-md font-medium shadow-sm text-center">
+                                    Atualmente trabalhando nesta empresa
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div>
+                                    <label className="block mb-1">Mês término</label>
+                                    <select
+                                        className="w-full p-3 border rounded-lg"
+                                        value={exp.fimMes}
+                                        onChange={(e) => atualizarCampo(index, "fimMes", e.target.value)}
+                                    >
+                                        <option value="">Selecione</option>
+                                        {meses.map((m) => <option key={m}>{m}</option>)}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block mb-1">Ano término</label>
+                                    <select
+                                        className="w-full p-3 border rounded-lg"
+                                        value={exp.fimAno}
+                                        onChange={(e) => atualizarCampo(index, "fimAno", e.target.value)}
+                                    >
+                                        <option value="">Selecione</option>
+                                        {anos.map((a) => <option key={a}>{a}</option>)}
+                                    </select>
+                                </div>
+                            </>
+                        )}
                     </div>
 
-                    {/* Atividades */}
+                    <div className="mb-4">
+                        <label className="flex items-center gap-2 text-sm text-gray-700">
+                            <input
+                                type="checkbox"
+                                checked={exp.atualmente}
+                                onChange={() => alternarAtualmente(index)}
+                            />
+                            Trabalho atualmente nesta empresa
+                        </label>
+                    </div>
+
                     <div className="mb-2">
                         <label className="block text-[#2E2E2E] font-medium mb-2">O que você fazia na empresa?</label>
                         {exp.atividades.map((atv, atvIndex) => (
