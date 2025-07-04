@@ -59,8 +59,8 @@ function ExperienciaProfissional({ dados, setDados }) {
     };
 
     const meses = [
-        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        "Jan", "Fev", "Mar", "Abr", "Maio", "Jun",
+        "Jul", "Ago", "Set", "Out", "Nov", "Dez"
     ];
 
     const anos = Array.from({ length: 40 }, (_, i) => String(2025 - i));

@@ -81,7 +81,7 @@ function CriarCurriculo() {
                     <PDFDownloadLink
                         document={<CurriculoPDF dados={formulario} />}
                         fileName="curriculo.pdf"
-                        className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center"
+                        className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center cursor-pointer"
                     >
                         {({ loading }) => loading ? "Gerando PDF..." : "Baixar Currículo em PDF"}
                     </PDFDownloadLink>

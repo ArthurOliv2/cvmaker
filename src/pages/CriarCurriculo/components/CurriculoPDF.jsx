@@ -1,144 +1,191 @@
-import {
-    Document,
-    Page,
-    Text,
-    View,
-    StyleSheet,
-    Font,
-    Link
-} from '@react-pdf/renderer';
+import React from "react";
+import { Document, Page, Text, View, StyleSheet, Font } from "@react-pdf/renderer";
 
-// Estilos
+import Arial from '../../../fonts/arial.ttf';
+import ArialBold from '../../../fonts/arialbd.ttf';
+import ArialItalic from '../../../fonts/ariali.ttf';
+import ArialBoldItalic from '../../../fonts/arialbi.ttf';
+
+Font.register({
+    family: 'Arial',
+    fonts: [
+        { src: Arial, fontWeight: 'normal', fontStyle: 'normal' },
+        { src: ArialBold, fontWeight: 'bold' },
+        { src: ArialItalic, fontStyle: 'italic' },
+        { src: ArialBoldItalic, fontWeight: 'bold', fontStyle: 'italic' },
+    ],
+});
+
 const styles = StyleSheet.create({
     page: {
-        padding: 40,
-        fontSize: 11,
-        fontFamily: 'Helvetica',
-        lineHeight: 1.6,
+        paddingTop: 72,
+        paddingBottom: 72,
+        paddingLeft: 72,
+        paddingRight: 72,
+        fontFamily: "Arial",
+        fontSize: 12,
+        lineHeight: 1.16,
     },
-    header: {
-        textAlign: 'center',
-        marginBottom: 12,
+    section: { marginBottom: 10 },
+    sectionXP: { paddingRight: 23, marginBottom: 10 },
+    titulo: { fontSize: 15, fontWeight: "bold", marginBottom: 14 },
+    texto: { textAlign: "left", letterSpacing: 0.077 },
+    textoXP: { textAlign: "left", letterSpacing: 0.1, lineHeight: 0.88 },
+    resumo: {
+        textAlign: "left",
+        letterSpacing: 0.09,
+        lineHeight: 0.88,
+        marginBottom: 20,
     },
     nome: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginBottom: 17,
         textTransform: 'uppercase',
     },
-    infoPessoal: {
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    linkEmail: {
-        color: '#0077cc',
-        textDecoration: 'underline',
-    },
-    section: {
-        marginBottom: 14,
-    },
-    tituloSecao: {
+    infoPerfil: { fontSize: 12, textAlign: "center", marginBottom: 10 },
+    emailPerfil: {
         fontSize: 12,
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
+        color: '#2A6CB4',
+        textDecoration: 'underline',
+        textAlign: 'center',
+        marginBottom: 9,
+    },
+    empresa: {
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        marginBottom: 9.5,
+    },
+    cargo: { fontWeight: "bold", marginBottom: 10 },
+    projeto: { fontWeight: "bold", fontStyle: "normal", marginBottom: 2 },
+    linhaPeriodo: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginBottom: 6.8,
+    },
+    periodo: {
         marginBottom: 4,
     },
-    bold: {
-        fontWeight: 'bold',
+    linhaHifen: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginLeft: 18
     },
-    experienciaItem: {
-        marginBottom: 8,
-    },
-    experienciaTitulo: {
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-    },
-    experienciaCargo: {
-        marginTop: 2,
-        marginBottom: 2,
-    },
-    experienciaPeriodo: {
-        fontSize: 10,
-        color: '#333',
-        marginBottom: 4,
+    hifen: { fontSize: 10, marginRight: 13.5, marginTop: 1 },
+    sectionBullet: { marginBottom: 21 },
+    linhaBullet: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginLeft: 18,
+        marginBottom: 2.5,
     },
     bullet: {
-        marginLeft: 10,
-        marginBottom: 2,
+        fontSize: 10,
+        fontWeight: 'bold',
+        marginRight: 12,
+        marginTop: 1,
     },
 });
 
-const CurriculoPDF = () => (
+const CurriculoPDF = ({ dados }) => (
     <Document>
         <Page size="A4" style={styles.page}>
-            
-            {/* Nome e Info Pessoal */}
-            <View style={styles.header}>
-                <Text style={styles.nome}>ARTHUR OLIVEIRA PIRES MARINHO CORREIA</Text>
-            </View>
-            <View style={styles.infoPessoal}>
-                <Text>23 anos</Text>
-                <Text>Maricá, Araçatiba/RJ</Text>
-                <Text>(21) 97217-0432</Text>
-                <Link src="mailto:arthurolivep@gmail.com" style={styles.linkEmail}>
-                    arthurolivep@gmail.com
-                </Link>
-            </View>
+
+            {/* Perfil */}
+            <Text style={styles.nome}>{dados.perfil.nome}</Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.idade} anos</Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.cidade}, {dados.perfil.bairro}/RJ</Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.telefone}</Text>
+            <Text style={styles.emailPerfil}>{dados.perfil.email}</Text>
 
             {/* Objetivo */}
-            <View style={styles.section}>
-                <Text style={styles.tituloSecao}>Objetivo</Text>
-                <Text>Programador Full Stack</Text>
-            </View>
+            {dados.objetivo && (
+                <View style={styles.section}>
+                    <Text style={styles.titulo}>OBJETIVO</Text>
+                    <Text style={styles.texto}>{dados.objetivo}</Text>
+                </View>
+            )}
 
             {/* Resumo Profissional */}
-            <View style={styles.section}>
-                <Text style={styles.tituloSecao}>Resumo Profissional</Text>
-                <Text>
-                    Desenvolvedor com um forte conhecimento fundamental em HTML, CSS e JavaScript,
-                    complementado por experiência em PHP e no framework Laravel. Possuindo um bom entendimento
-                    de bancos de dados como MySQL e PostgreSQL, dedicado aos estudos de frameworks JavaScript
-                    (Node.js, Vue.JS), além do Bootstrap. Estudante da Universidade de Vassouras, buscando
-                    uma oportunidade para aplicar e desenvolver minhas habilidades em um ambiente profissional.
-                </Text>
-            </View>
+            {dados.resumo && (
+                <View style={styles.section}>
+                    <Text style={styles.titulo}>RESUMO PROFISSIONAL</Text>
+                    <Text style={styles.resumo} hyphenationCallback={(word) => [word]}>
+                        {dados.resumo}
+                    </Text>
+                </View>
+            )}
 
             {/* Formação Acadêmica */}
-            <View style={styles.section}>
-                <Text style={styles.tituloSecao}>Formação Acadêmica</Text>
-                <Text style={styles.bold}>
-                    Matemática Licenciatura <Text>(Universidade Federal Fluminense), incompleto</Text>
-                </Text>
-                <Text style={styles.bold}>
-                    Engenharia de Software <Text>(Universidade de Vassouras), cursando</Text>
-                </Text>
-            </View>
+            {dados.formacoes.length > 0 && (
+                <View style={styles.sectionBullet}>
+                    <Text style={styles.titulo}>FORMAÇÃO ACADÊMICA</Text>
+                    {dados.formacoes.map((formacao, index) => (
+                        <View key={index} style={styles.linhaBullet}>
+                            <Text style={styles.bullet}>●</Text>
+                            <Text style={styles.texto}>
+                                <Text style={{ fontWeight: "bold" }}>{formacao.curso}</Text> ({formacao.universidade}), {formacao.status}
+                            </Text>
+                        </View>
+                    ))}
+                </View>
+            )}
 
             {/* Experiência */}
-            <View style={styles.section}>
-                <Text style={styles.tituloSecao}>Experiência</Text>
+            {dados.experiencias.length > 0 && (
+                <View style={styles.sectionXP}>
+                    <Text style={styles.titulo}>EXPERIÊNCIA</Text>
 
-                {/* Experiência 1 */}
-                <View style={styles.experienciaItem}>
-                    <Text style={styles.experienciaTitulo}>
-                        PLATAFORMA DE COMUNICAÇÃO MOTOBOY/EMPRESA (projeto acadêmico)
-                    </Text>
-                    <Text style={styles.experienciaCargo}>Desenvolvedor Full Stack</Text>
-                    <Text style={styles.experienciaPeriodo}>Fev de 2025 – atualmente</Text>
-                    <View>
-                        <Text style={styles.bullet}>• Colaborei ativamente na concepção do projeto, liderando o desenvolvimento do código base da fase inicial;</Text>
-                        <Text style={styles.bullet}>• Ajudei no trabalho de busca de requisitos junto ao grupo de análise;</Text>
-                        <Text style={styles.bullet}>• Desenvolvi landing page com HTML, CSS e JS + integração com EmailJS;</Text>
-                        <Text style={styles.bullet}>• Modelei banco de dados e preparei estrutura PHP + Laravel.</Text>
-                    </View>
+                    {dados.experiencias.map((exp, index) => (
+                        <View key={index} style={{ marginBottom: 20 }}>
+                            <View style={styles.linhaHifen}>
+                                <Text style={styles.hifen}>-</Text>
+                                <Text style={styles.empresa}>{exp.empresa.toUpperCase()}</Text>
+                            </View>
+                            <Text style={styles.cargo}>{exp.cargo}</Text>
+                            {exp.projeto && <Text style={styles.projeto}>{exp.projeto}</Text>}
+                            <View style={styles.linhaPeriodo}>
+                                <Text style={styles.periodo}>{exp.inicioMes} de {exp.inicioAno} – {exp.fimMes} de {exp.fimAno}</Text>
+                            </View>
+                            {exp.atividades.map((atividade, i) => (
+                                <View key={i} style={styles.linhaBullet}>
+                                    <Text style={styles.bullet}>●</Text>
+                                    <Text style={styles.textoXP} hyphenationCallback={(word) => [word]}>
+                                        {atividade}
+                                    </Text>
+                                </View>
+                            ))}
+                        </View>
+                    ))}
                 </View>
+            )}
 
-                {/* Experiência 2 */}
-                <View style={styles.experienciaItem}>
-                    <Text style={styles.experienciaTitulo}>DOMUS LAGUNA (projeto acadêmico)</Text>
-                    <Text style={styles.experienciaCargo}>Gerente de projeto acadêmico</Text>
-                    <Text style={styles.experienciaPeriodo}>Mar 2024 – Jan 2025</Text>
+            {/* Idiomas */}
+            {dados.idiomas.length > 0 && (
+                <View style={styles.section}>
+                    <Text style={styles.titulo}>IDIOMAS</Text>
+                    {dados.idiomas.map((idioma, index) => (
+                        <Text key={index} style={styles.texto}>{idioma}</Text>
+                    ))}
                 </View>
-            </View>
+            )}
+
+            {/* Formação Complementar */}
+            {dados.cursosComplementares.length > 0 && (
+                <View style={styles.section}>
+                    <Text style={styles.titulo}>FORMAÇÃO COMPLEMENTAR</Text>
+                    {dados.cursosComplementares.map((curso, index) => (
+                        <View key={index} style={styles.linhaBullet}>
+                            <Text style={styles.bullet}>●</Text>
+                            <Text style={styles.texto}>
+                                <Text style={{ fontWeight: "bold" }}>{curso.nome}</Text> ({curso.curso}) - {curso.cargaHoraria}h
+                            </Text>
+                        </View>
+                    ))}
+                </View>
+            )}
+
         </Page>
     </Document>
 );
