@@ -1,6 +1,8 @@
+import InputMask from 'react-input-mask';
+
 function Perfil({ dados, setDados }) {
 
-    function capitalizarNome(nome) {
+    function formatarNome(nome) {
         const palavrasMinusculas = ["de", "da", "do", "das", "dos", "e"];
         return nome
             .toLowerCase()
@@ -12,6 +14,28 @@ function Perfil({ dados, setDados }) {
                 return palavra.charAt(0).toUpperCase() + palavra.slice(1);
             })
             .join(" ");
+    }
+
+    function formatarTelefone(valor) {
+        const digits = valor.replace(/\D/g, '').slice(0, 11);
+
+        if (digits.length === 0) return '';
+
+        const ddd = digits.slice(0, 2);
+        const parte1 = digits.slice(2, digits.length <= 10 ? 6 : 7);
+        const parte2 = digits.slice(digits.length <= 10 ? 6 : 7);
+
+        let resultado = `(${ddd}`;
+
+        if (digits.length >= 3) {
+            resultado += `) ${parte1}`;
+        }
+
+        if (parte2) {
+            resultado += `-${parte2}`;
+        }
+
+        return resultado;
     }
 
     const estados = [
@@ -57,7 +81,7 @@ function Perfil({ dados, setDados }) {
                         <input
                             type="text"
                             value={dados.cidade}
-                            onChange={(e) => setDados({ ...dados, cidade: capitalizarNome(e.target.value) })}
+                            onChange={(e) => setDados({ ...dados, cidade: formatarNome(e.target.value) })}
                             placeholder="Ex: Maricá"
                             className="w-full p-3 border rounded-lg"
                         />
@@ -67,7 +91,7 @@ function Perfil({ dados, setDados }) {
                         <input
                             type="text"
                             value={dados.bairro}
-                            onChange={(e) => setDados({ ...dados, bairro: capitalizarNome(e.target.value) })}
+                            onChange={(e) => setDados({ ...dados, bairro: formatarNome(e.target.value) })}
                             placeholder="Ex: Centro"
                             className="w-full p-3 border rounded-lg"
                         />
@@ -101,12 +125,12 @@ function Perfil({ dados, setDados }) {
                     </div>
                     <div>
                         <label className="block text-[#2E2E2E] font-medium mb-1">Número de telefone</label>
-                        <input
+                        <input 
                             type="text"
                             value={dados.telefone}
-                            onChange={(e) => setDados({ ...dados, telefone: e.target.value })}
-                            placeholder="(21) 12345-6789"
-                            className="w-full p-3 border rounded-lg"
+                            onChange={(e) => setDados({ ...dados, telefone: formatarTelefone(e.target.value) })}
+                            placeholder="(21) 91234-5678"
+                            className="w-full p-3 border rounded-lg"    
                         />
                     </div>
                 </div>
