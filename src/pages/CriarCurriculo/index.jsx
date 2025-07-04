@@ -20,6 +20,7 @@ function CriarCurriculo() {
             idade: "",
             cidade: "",
             bairro: "",
+            estado: "",
             telefone: "",
             email: ""
         },
@@ -78,9 +79,20 @@ function CriarCurriculo() {
                 />
                 
                 <div className="flex justify-center mt-8">
-                    <PDFDownloadLink
-                        document={<CurriculoPDF dados={formulario} />}
-                        fileName="curriculo.pdf"
+                    <PDFDownloadLink 
+                        fileName={`curriculo-${formulario.perfil.nome
+                            ? formulario.perfil.nome
+                                .trim()
+                                .split(/\s+/)
+                                .slice(0, 2)
+                                .join("-")
+                                .toLowerCase()
+                                .normalize("NFD")
+                                .replace(/[\u0300-\u036f]/g, "")
+                            : "sem-nome"
+                        }.pdf`}
+
+                        document={<CurriculoPDF dados={formulario} />}                        
                         className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center cursor-pointer"
                     >
                         {({ loading }) => loading ? "Gerando PDF..." : "Baixar Currículo em PDF"}

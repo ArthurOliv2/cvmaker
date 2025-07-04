@@ -95,7 +95,7 @@ const CurriculoPDF = ({ dados }) => (
             {/* Perfil */}
             <Text style={styles.nome}>{dados.perfil.nome}</Text>
             <Text style={styles.infoPerfil}>{dados.perfil.idade} anos</Text>
-            <Text style={styles.infoPerfil}>{dados.perfil.cidade}, {dados.perfil.bairro}/RJ</Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.cidade}, {dados.perfil.bairro}/{dados.perfil.estado}</Text>
             <Text style={styles.infoPerfil}>{dados.perfil.telefone}</Text>
             <Text style={styles.emailPerfil}>{dados.perfil.email}</Text>
 

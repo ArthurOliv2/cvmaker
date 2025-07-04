@@ -1,4 +1,26 @@
 function Perfil({ dados, setDados }) {
+
+    function capitalizarNome(nome) {
+        const palavrasMinusculas = ["de", "da", "do", "das", "dos", "e"];
+        return nome
+            .toLowerCase()
+            .split(" ")
+            .map((palavra, index) => {
+                if (index > 0 && palavrasMinusculas.includes(palavra)) {
+                    return palavra;
+                }
+                return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+            })
+            .join(" ");
+    }
+
+    const estados = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF",
+        "MT", "MS", "MG", "PA", "PB", "PR", "PE", 
+        "RS", "RO", "RR", "SC", "SP", "SE", "TO",
+        "ES", "GO", "MA", "PI", "RJ", "RN",
+    ]
+
     return (
         <section className="mb-10">
             <h2 className="text-2xl font-bold text-[#2E2E2E] font-poppins mb-4">Perfil</h2>
@@ -19,7 +41,7 @@ function Perfil({ dados, setDados }) {
                     <div>
                         <label className="block text-[#2E2E2E] font-medium mb-1">Idade</label>
                         <input
-                            type="text"
+                            type="number"
                             value={dados.idade}
                             onChange={(e) => setDados({ ...dados, idade: e.target.value })}
                             placeholder="Ex: 22"
@@ -29,13 +51,13 @@ function Perfil({ dados, setDados }) {
                 </div>
 
                 {/* Linha 2: Cidade e Bairro */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                     <div>
                         <label className="block text-[#2E2E2E] font-medium mb-1">Cidade</label>
                         <input
                             type="text"
                             value={dados.cidade}
-                            onChange={(e) => setDados({ ...dados, cidade: e.target.value })}
+                            onChange={(e) => setDados({ ...dados, cidade: capitalizarNome(e.target.value) })}
                             placeholder="Ex: Maricá"
                             className="w-full p-3 border rounded-lg"
                         />
@@ -45,10 +67,23 @@ function Perfil({ dados, setDados }) {
                         <input
                             type="text"
                             value={dados.bairro}
-                            onChange={(e) => setDados({ ...dados, bairro: e.target.value })}
+                            onChange={(e) => setDados({ ...dados, bairro: capitalizarNome(e.target.value) })}
                             placeholder="Ex: Centro"
                             className="w-full p-3 border rounded-lg"
                         />
+                    </div>
+                    <div>
+                        <label className="block text-[#2E2E2E] font-medium mb-1">Estado (UF)</label>
+                        <select
+                            value={dados.estado || ""}
+                            onChange={(e) => setDados({ ...dados, estado: e.target.value })}
+                            className="w-full p-3 border rounded-lg"
+                        >
+                            <option value="">Selecione</option>
+                            {estados.map((uf) => (
+                                <option key={uf} value={uf}>{uf}</option>
+                            ))}
+                        </select>
                     </div>
                 </div>
 
