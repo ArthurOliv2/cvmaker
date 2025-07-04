@@ -1,5 +1,3 @@
-import InputMask from 'react-input-mask';
-
 function Perfil({ dados, setDados }) {
 
     function formatarNome(nome) {
