@@ -165,8 +165,10 @@ const CurriculoPDF = ({ dados }) => (
             {dados.idiomas.length > 0 && (
                 <View style={styles.section}>
                     <Text style={styles.titulo}>IDIOMAS</Text>
-                    {dados.idiomas.map((idioma, index) => (
-                        <Text key={index} style={styles.texto}>{idioma}</Text>
+                    {dados.idiomas.map((idiomaObj, index) => (
+                        <Text key={index} style={styles.texto}>
+                            {idiomaObj.idioma} - {idiomaObj.nivel}
+                        </Text>
                     ))}
                 </View>
             )}
@@ -179,7 +181,8 @@ const CurriculoPDF = ({ dados }) => (
                         <View key={index} style={styles.linhaBullet}>
                             <Text style={styles.bullet}>●</Text>
                             <Text style={styles.texto}>
-                                <Text style={{ fontWeight: "bold" }}>{curso.nome}</Text> ({curso.curso}) - {curso.cargaHoraria}h
+                                <Text style={{ fontWeight: "bold" }}>{curso.nome}</Text> 
+                                ({curso.curso}) - {curso.cargaHoraria}h
                             </Text>
                         </View>
                     ))}
