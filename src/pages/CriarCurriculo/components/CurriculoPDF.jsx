@@ -146,7 +146,8 @@ const CurriculoPDF = ({ dados }) => (
                             <Text style={styles.cargo}>{exp.cargo}</Text>
                             {exp.projeto && <Text style={styles.projeto}>{exp.projeto}</Text>}
                             <View style={styles.linhaPeriodo}>
-                                <Text style={styles.periodo}>{exp.inicioMes} de {exp.inicioAno} – {exp.fimMes} de {exp.fimAno}</Text>
+                                <Text style={styles.periodo}>
+                                    {exp.inicioMes} de {exp.inicioAno} – {exp.atualmente ? "Atualmente" : `${exp.fimMes} de ${exp.fimAno}`}</Text>
                             </View>
                             {exp.atividades.map((atividade, i) => (
                                 <View key={i} style={styles.linhaBullet}>
@@ -188,7 +189,6 @@ const CurriculoPDF = ({ dados }) => (
                     ))}
                 </View>
             )}
-
         </Page>
     </Document>
 );
