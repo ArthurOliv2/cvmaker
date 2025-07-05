@@ -8,7 +8,7 @@ function Objetivo({ dados, setDados }) {
                 <input
                     type="text"
                     value={dados}
-                    onChange={(e) => setDados(e.target.value)}
+                    onChange={(e) => setDados(e.target.value || "")}
                     placeholder="Ex: Programador Full Stack"
                     className="w-full p-3 border rounded-lg"
                 />
@@ -17,4 +17,4 @@ function Objetivo({ dados, setDados }) {
     );
 }
 
-export default Objetivo
+export default Objetivo;

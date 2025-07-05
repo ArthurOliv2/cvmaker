@@ -93,11 +93,13 @@ const CurriculoPDF = ({ dados }) => (
         <Page size="A4" style={styles.page}>
 
             {/* Perfil */}
-            <Text style={styles.nome}>{dados.perfil.nome}</Text>
-            <Text style={styles.infoPerfil}>{dados.perfil.idade} anos</Text>
-            <Text style={styles.infoPerfil}>{dados.perfil.cidade}, {dados.perfil.bairro}/{dados.perfil.estado}</Text>
-            <Text style={styles.infoPerfil}>{dados.perfil.telefone}</Text>
-            <Text style={styles.emailPerfil}>{dados.perfil.email}</Text>
+            <Text style={styles.nome}>{dados.perfil.nome || ""}</Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.idade ? `${dados.perfil.idade} anos` : ""}</Text>
+            <Text style={styles.infoPerfil}>
+                {[dados.perfil.cidade, dados.perfil.bairro, dados.perfil.estado].filter(Boolean).join(", ")}
+            </Text>
+            <Text style={styles.infoPerfil}>{dados.perfil.telefone || ""}</Text>
+            <Text style={styles.emailPerfil}>{dados.perfil.email || ""}</Text>
 
             {/* Objetivo */}
             {dados.objetivo && (
@@ -118,14 +120,14 @@ const CurriculoPDF = ({ dados }) => (
             )}
 
             {/* Formação Acadêmica */}
-            {dados.formacoes.length > 0 && (
+            {(dados.formacoes || []).length > 0 && (
                 <View style={styles.sectionBullet}>
                     <Text style={styles.titulo}>FORMAÇÃO ACADÊMICA</Text>
                     {dados.formacoes.map((formacao, index) => (
                         <View key={index} style={styles.linhaBullet}>
                             <Text style={styles.bullet}>●</Text>
                             <Text style={styles.texto}>
-                                <Text style={{ fontWeight: "bold" }}>{formacao.curso}</Text> ({formacao.universidade}), {formacao.status}
+                                <Text style={{ fontWeight: "bold" }}>{formacao.curso}</Text> ({formacao.universidade}), {formacao.status};
                             </Text>
                         </View>
                     ))}
@@ -133,7 +135,7 @@ const CurriculoPDF = ({ dados }) => (
             )}
 
             {/* Experiência */}
-            {dados.experiencias.length > 0 && (
+            {(dados.experiencias || []).length > 0 && (
                 <View style={styles.sectionXP}>
                     <Text style={styles.titulo}>EXPERIÊNCIA</Text>
 
@@ -141,7 +143,7 @@ const CurriculoPDF = ({ dados }) => (
                         <View key={index} style={{ marginBottom: 20 }}>
                             <View style={styles.linhaHifen}>
                                 <Text style={styles.hifen}>-</Text>
-                                <Text style={styles.empresa}>{exp.empresa.toUpperCase()}</Text>
+                                <Text style={styles.empresa}>{(exp.empresa || "").toUpperCase()}</Text>
                             </View>
                             <Text style={styles.cargo}>{exp.cargo}</Text>
                             {exp.projeto && <Text style={styles.projeto}>{exp.projeto}</Text>}
@@ -149,11 +151,11 @@ const CurriculoPDF = ({ dados }) => (
                                 <Text style={styles.periodo}>
                                     {exp.inicioMes} de {exp.inicioAno} – {exp.atualmente ? "Atualmente" : `${exp.fimMes} de ${exp.fimAno}`}</Text>
                             </View>
-                            {exp.atividades.map((atividade, i) => (
+                            {(exp.atividades || []).map((atividade, i) => (
                                 <View key={i} style={styles.linhaBullet}>
                                     <Text style={styles.bullet}>●</Text>
                                     <Text style={styles.textoXP} hyphenationCallback={(word) => [word]}>
-                                        {atividade}
+                                        {atividade};
                                     </Text>
                                 </View>
                             ))}
@@ -163,7 +165,7 @@ const CurriculoPDF = ({ dados }) => (
             )}
 
             {/* Idiomas */}
-            {dados.idiomas.length > 0 && (
+            {(dados.idiomas || []).length > 0 && (
                 <View style={styles.section}>
                     <Text style={styles.titulo}>IDIOMAS</Text>
                     {dados.idiomas.map((idiomaObj, index) => (
@@ -175,15 +177,15 @@ const CurriculoPDF = ({ dados }) => (
             )}
 
             {/* Formação Complementar */}
-            {dados.cursosComplementares.length > 0 && (
+            {(dados.cursosComplementares || []).length > 0 && (
                 <View style={styles.section}>
                     <Text style={styles.titulo}>FORMAÇÃO COMPLEMENTAR</Text>
                     {dados.cursosComplementares.map((curso, index) => (
                         <View key={index} style={styles.linhaBullet}>
                             <Text style={styles.bullet}>●</Text>
                             <Text style={styles.texto}>
-                                <Text style={{ fontWeight: "bold" }}>{curso.nome}</Text> 
-                                ({curso.curso}) - {curso.cargaHoraria}h
+                                <Text style={{ fontWeight: "bold" }}>{curso.competencia} </Text> 
+                                ({curso.nomeCurso}) - {curso.horas}h;
                             </Text>
                         </View>
                     ))}

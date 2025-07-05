@@ -5,7 +5,7 @@ import ResumoProfissional from "./components/ResumoProfissional";
 import FormacaoAcademica from "./components/FormacaoAcademica";
 import ExperienciaProfissional from "./components/ExperienciaProfissional";
 import Idiomas from "./components/Idiomas";
-import FormacaoComplementar from "./components/FormaçãoComplementar";
+import FormacaoComplementar from "./components/FormacaoComplementar";
 import Footer from "../../components/Footer";
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -31,6 +31,19 @@ function CriarCurriculo() {
         idiomas: [],
         cursosComplementares: []
     });
+
+    const nomeFormatado = formulario.perfil.nome
+        ? formulario.perfil.nome
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .join("-")
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+        : "sem-nome";
+
+    const dadosMinimosPreenchidos = formulario.perfil.nome.trim() !== "";
 
     return (
         <>
@@ -77,29 +90,26 @@ function CriarCurriculo() {
                     dados={formulario.cursosComplementares}
                     setDados={(novo) => setFormulario(prev => ({ ...prev, cursosComplementares: novo }))}
                 />
-                
-                <div className="flex justify-center mt-8">
-                    <PDFDownloadLink 
-                        fileName={`curriculo-${formulario.perfil.nome
-                            ? formulario.perfil.nome
-                                .trim()
-                                .split(/\s+/)
-                                .slice(0, 2)
-                                .join("-")
-                                .toLowerCase()
-                                .normalize("NFD")
-                                .replace(/[\u0300-\u036f]/g, "")
-                            : "sem-nome"
-                        }.pdf`}
 
-                        document={<CurriculoPDF dados={formulario} />}                        
-                        className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center cursor-pointer"
-                    >
-                        {({ loading }) => loading ? "Gerando PDF..." : "Baixar Currículo em PDF"}
-                    </PDFDownloadLink>
+                <div className="flex justify-center mt-8">
+                    {dadosMinimosPreenchidos ? (
+                        <PDFDownloadLink 
+                            fileName={`curriculo-${nomeFormatado}.pdf`}
+                            document={<CurriculoPDF dados={formulario} />}                        
+                            className="bg-[#0097B2] text-white font-medium px-6 py-2 rounded-md hover:bg-[#007A8C] text-center cursor-pointer"
+                        >
+                            {({ loading }) => loading ? "Gerando PDF..." : "Baixar Currículo em PDF"}
+                        </PDFDownloadLink>
+                    ) : (
+                        <button
+                            disabled
+                            className="bg-gray-300 text-gray-600 font-medium px-6 py-2 rounded-md text-center cursor-not-allowed"
+                        >
+                            Preencha pelo menos o nome para gerar o PDF
+                        </button>
+                    )}
                 </div>
             </main>
-            
             <Footer />
         </>
     );
